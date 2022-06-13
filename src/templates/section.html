@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} : {{ super() }}{% endblock title %}
+
+{% block nav %}
+    {% for section_path in section.ancestors %}
+        {% set section = get_section(path=section_path, metadata_only=true) %}
+        <a href={{ section.permalink }} alt={{ section.description }}>{{ section.title }}</a>
+        <br>
+    {% endfor %}
+    <b>{{ section.title }}</b>
+    <br>
+
+    {% for section_path in section.subsections %}
+        {% set section =  get_section(path=section_path, metadata_only=true) %}
+        <a href={{ section.permalink }}>{{ section.title }}️</a>
+    {% endfor %}
+
+    {% for page in section.pages %}
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+    {% endfor %}
+
+
+    <br>
+
+{% endblock %}
+
+{% block content %}
+    {{ section.content | safe }}
+{% endblock content %}

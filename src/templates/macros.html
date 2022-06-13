@@ -1,0 +1,25 @@
+
+{% macro nav(current, ancestors, siblings) %}
+    {% for path in ancestors %}
+        {% set section =  get_section(path=path) %}
+        <a href="{{ section.permalink }}">{{ section.title }}</a>
+        <br>
+        {% if loop.last %}
+
+            {% for section_path in subsections %}
+                {% set section =  get_section(path=section_path, metadata_only=true) %}
+                <a href={{ section.permalink }}>{{ section.title }}️</a>
+            {% endfor %}
+
+            {% for sibling in siblings %}
+                {% if sibling == current %}
+                    {{sibling.title}}
+                    {%  else %}
+                    <a href="{{ sibling.permalink }}">{{ sibling.title }}</a>
+                {% endif %}
+            {% endfor %}
+
+        {% endif %}
+
+    {% endfor %}
+{% endmacro input %}

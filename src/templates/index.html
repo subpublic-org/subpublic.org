@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title | capitalize }} : {{ super() }}{% endblock title %}
+
+{% block content %}
+    <img class="mx-auto max-w-lg w-4/5" src="/images/logo.png" alt="subpublic logo" >
+{% endblock content %}
